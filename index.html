@@ -1,7 +1,69 @@
+
+<!DOCTYPE html>
 <html>
 <head>
+  <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+  <style type="text/css">
+    #draggable { width: 75px; height: 25px; background: silver; padding: 10px; }
+    #droppable { position: absolute; left: 250px; top: 0; width: 125px; height: 75px; background: gray; color: white; padding: 10px; }
+    #selectable .ui-selecting {	background: silver; }
+    #selectable .ui-selected {	background: gray; }
+    div.w3 { max-width: 200px; }
+  </style>
+  <script>
+  $(document).ready(function() {
+    $("#draggable").draggable({ axis: 'x' , 
+	drag: function(event, ui) {$("div#tag").text(""+event.pageX+" "+event.pageY);}, 
+	stop: function(event, ui) {$("div#tag").text("");}});
+    $("#droppable").droppable({
+	drop: function() { alert('dropped'); $("div#tag2").text("");},
+	create: function() { $("div#tag2").text("created"); },
+	out: function() { $("div#tag2").text("out"); },
+	over: function() { $("div#tag2").text("over"); }
+    }).resizable();
+    $("#selectable").selectable().sortable();
+    $("#tabs").tabs();
+  });
+  </script>
 </head>
-<body>
-Hello.
-</body>
+<body style="font-size:62.5%;">
+  
+<div id="tabs">
+    <ul>
+        <li><a href="#fragment-1"><span>One</span></a></li>
+        <li><a href="#fragment-2"><span>Two</span></a></li>
+        <li><a href="#fragment-3"><span>Three</span></a></li>
+    </ul>
+    <div id="fragment-1">
+        <p>First tab is active by default:</p>
+        <pre><code>$('#example').tabs();</code></pre>
+    </div>
+    <div id="fragment-2">
+        Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
+        Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
+    </div>
+    <div id="fragment-3">
+        Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
+        Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
+        Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
+    </div>
+</div>
+<div>
+<div id="droppable">Drop here <BR /><div id="tag2"></div><BR /><div id="tag"></div></div>
+</div>
+<div id="draggable">Drag me</div>
 
+<div class="w3">
+<ul id="selectable">
+<li>Item 1</li>
+<li>Item 2</li>
+<li>Item 9</li>
+<li>Item 3</li>
+<li>Item 4</li>
+<li>Item 5</li>
+</ul>
+</div>
+</body>
+</html> 
